@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Phone, MapPin, Users, AlertTriangle, X, Plus, Trash2, ShieldAlert } from 'lucide-react'
+import { Phone, Users, AlertTriangle, X, Plus, Trash2, ShieldAlert, Hospital } from 'lucide-react'
 import BottomNav from '../components/BottomNav'
 
 interface Contact {
@@ -101,28 +101,20 @@ export default function Emergency() {
             </div>
           </a>
 
-          <button
-            onClick={() => {
-              if (!navigator.geolocation) return
-              const win = window.open('', '_blank')
-              navigator.geolocation.getCurrentPosition(
-                pos => {
-                  const { latitude, longitude } = pos.coords
-                  if (win) win.location.href = `https://maps.google.com/?q=${latitude},${longitude}`
-                },
-                () => { if (win) win.close() }
-              )
-            }}
-            className="flex items-center gap-4 bg-bg-card border border-white/10 rounded-2xl px-5 py-4 hover:border-accent/30 transition-all active:scale-[0.98] w-full text-left"
+          <a
+            href="https://www.google.com/maps/search/hospital+pronto+socorro+perto+de+mim"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-4 bg-bg-card border border-white/10 rounded-2xl px-5 py-4 hover:border-accent/30 transition-all active:scale-[0.98]"
           >
             <div className="w-10 h-10 rounded-full bg-green-500/10 border border-green-500/20 flex items-center justify-center flex-shrink-0">
-              <MapPin size={18} className="text-green-400" />
+              <Hospital size={18} className="text-green-400" />
             </div>
             <div>
-              <p className="text-sm font-semibold text-white">Compartilhar Localização</p>
-              <p className="text-xs text-white/40">Envie sua localização atual</p>
+              <p className="text-sm font-semibold text-white">Buscar hospital próximo</p>
+              <p className="text-xs text-white/40">Abre o Google Maps com hospitais perto de você</p>
             </div>
-          </button>
+          </a>
         </div>
 
         {/* Emergency contacts */}
