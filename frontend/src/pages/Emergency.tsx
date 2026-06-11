@@ -103,12 +103,15 @@ export default function Emergency() {
 
           <button
             onClick={() => {
-              if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(pos => {
+              if (!navigator.geolocation) return
+              const win = window.open('', '_blank')
+              navigator.geolocation.getCurrentPosition(
+                pos => {
                   const { latitude, longitude } = pos.coords
-                  window.open(`https://maps.google.com/?q=${latitude},${longitude}`, '_blank')
-                })
-              }
+                  if (win) win.location.href = `https://maps.google.com/?q=${latitude},${longitude}`
+                },
+                () => { if (win) win.close() }
+              )
             }}
             className="flex items-center gap-4 bg-bg-card border border-white/10 rounded-2xl px-5 py-4 hover:border-accent/30 transition-all active:scale-[0.98] w-full text-left"
           >
