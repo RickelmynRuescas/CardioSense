@@ -59,6 +59,31 @@ export default function Welcome() {
           <ChevronRight size={18} />
         </button>
 
+        {/* O que é BPM */}
+        <div className="w-full max-w-xs flex flex-col gap-2 text-left border-t border-white/8 pt-4">
+          <p className="text-xs font-semibold text-accent/70 uppercase tracking-widest">O que é BPM?</p>
+          <p className="text-sm text-white/40 leading-relaxed">
+            <span className="text-white/60 font-medium">BPM</span> significa <span className="text-white/60 font-medium">Batimentos Por Minuto</span> — é a unidade que mede quantas vezes o coração bate em 60 segundos.
+          </p>
+          <p className="text-sm text-white/40 leading-relaxed">
+            Para adultos em repouso, a faixa considerada normal é de <span className="text-accent font-semibold">60 a 100 BPM</span>. Abaixo disso pode indicar bradicardia; acima, taquicardia.
+          </p>
+          <div className="flex gap-2 mt-1">
+            <div className="flex-1 bg-blue-500/10 border border-blue-500/20 rounded-xl px-3 py-2 text-center">
+              <p className="text-xs font-bold text-blue-400">&lt; 60</p>
+              <p className="text-[10px] text-white/30 mt-0.5">Baixo</p>
+            </div>
+            <div className="flex-1 bg-green-500/10 border border-green-500/20 rounded-xl px-3 py-2 text-center">
+              <p className="text-xs font-bold text-green-400">60–100</p>
+              <p className="text-[10px] text-white/30 mt-0.5">Normal</p>
+            </div>
+            <div className="flex-1 bg-red-500/10 border border-red-500/20 rounded-xl px-3 py-2 text-center">
+              <p className="text-xs font-bold text-red-400">&gt; 100</p>
+              <p className="text-[10px] text-white/30 mt-0.5">Elevado</p>
+            </div>
+          </div>
+        </div>
+
         {/* Importância do BPM */}
         <div className="w-full max-w-xs flex flex-col gap-2 text-left border-t border-white/8 pt-4">
           <p className="text-xs font-semibold text-accent/70 uppercase tracking-widest">Por que medir seu BPM?</p>

@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Heart, Minus, Plus, Info } from 'lucide-react'
+import { Heart, Minus, Plus, Info, X } from 'lucide-react'
 import BottomNav from '../components/BottomNav'
 import { analyzeHeartRate, type HealthProfile } from '../utils/heartAnalysis'
 import { Heart as HeartIcon } from 'lucide-react'
@@ -9,6 +9,12 @@ export default function Monitor() {
   const navigate = useNavigate()
   const [bpm, setBpm] = useState(67)
   const [showTip, setShowTip] = useState(false)
+  const [tipClosing, setTipClosing] = useState(false)
+
+  function closeTip() {
+    setTipClosing(true)
+    setTimeout(() => { setShowTip(false); setTipClosing(false) }, 250)
+  }
 
   const profile: HealthProfile | null = useMemo(() => {
     const stored = localStorage.getItem('healthProfile')
@@ -65,17 +71,72 @@ export default function Monitor() {
         </button>
       </div>
 
-      {/* Tip */}
+      {/* Modal de dicas */}
       {showTip && (
-        <div className="mx-5 mb-4 bg-accent/10 border border-accent/20 rounded-2xl p-4">
-          <p className="text-xs text-accent font-medium mb-2">Como medir sua frequência cardíaca</p>
-          <ol className="text-xs text-white/50 space-y-1 list-decimal list-inside leading-relaxed">
-            <li>Sente-se e permaneça em repouso por alguns minutos</li>
-            <li>Localize o pulso no punho ou pescoço</li>
-            <li>Conte os batimentos durante 60 segundos</li>
-            <li>Digite o valor encontrado abaixo</li>
-            <li>Clique em Analisar Resultado</li>
-          </ol>
+        <div className="fixed inset-0 z-[200] flex items-end justify-center bg-black/60 backdrop-blur-sm px-4 pb-24">
+          <div className={`w-full max-w-sm bg-bg-secondary border border-white/10 rounded-2xl p-5 shadow-xl max-h-[80svh] overflow-y-auto flex flex-col gap-4 ${tipClosing ? 'modal-exit' : 'modal-enter'}`}>
+
+            <div className="flex items-center justify-between">
+              <h2 className="text-base font-bold text-white">Como medir sua frequência</h2>
+              <button onClick={closeTip} className="text-white/40 hover:text-white transition-colors">
+                <X size={20} />
+              </button>
+            </div>
+
+            {/* Método 1 — pulso */}
+            <div>
+              <p className="text-xs text-accent font-semibold mb-1.5">🤲 Pelo pulso (punho)</p>
+              <ol className="text-xs text-white/50 space-y-1 list-decimal list-inside leading-relaxed">
+                <li>Sente-se e fique em repouso por 2 minutos</li>
+                <li>Coloque 2 dedos na parte interna do pulso, abaixo do polegar</li>
+                <li>Conte os batimentos durante 60 segundos</li>
+                <li>Digite o valor encontrado abaixo</li>
+              </ol>
+            </div>
+
+            {/* Método 2 — pescoço */}
+            <div>
+              <p className="text-xs text-accent font-semibold mb-1.5">🫀 Pelo pescoço (carótida)</p>
+              <ol className="text-xs text-white/50 space-y-1 list-decimal list-inside leading-relaxed">
+                <li>Peça para alguém (ou use você mesmo) colocar o dedo indicador levemente na lateral do pescoço, ao lado da traqueia</li>
+                <li>Sinta o pulso sem apertar forte</li>
+                <li>Conte os batimentos por 60 segundos</li>
+                <li>Digite o valor abaixo</li>
+              </ol>
+            </div>
+
+            {/* Método 3 — dispositivos */}
+            <div>
+              <p className="text-xs text-accent font-semibold mb-1.5">⌚ Por dispositivos externos</p>
+              <ul className="text-xs text-white/50 space-y-1 list-disc list-inside leading-relaxed">
+                <li>Smartwatch ou relógio inteligente (Apple Watch, Galaxy Watch, etc.)</li>
+                <li>Oxímetro de dedo — mede SpO₂ e BPM simultaneamente</li>
+                <li>Monitor cardíaco de academia ou hospital</li>
+              </ul>
+            </div>
+
+            {/* Método 4 — câmera do celular */}
+            <div>
+              <p className="text-xs text-accent font-semibold mb-1.5">📱 Pela câmera do celular</p>
+              <ol className="text-xs text-white/50 space-y-1 list-decimal list-inside leading-relaxed">
+                <li>Abra apps como <span className="text-white/70">Cardiio</span>, <span className="text-white/70">Heart Rate Monitor</span> ou similar</li>
+                <li>Cubra a câmera traseira com o dedo indicador</li>
+                <li>Aguarde a leitura (leva cerca de 15 segundos)</li>
+                <li>Digite o BPM exibido pelo app abaixo</li>
+              </ol>
+            </div>
+
+            <p className="text-[10px] text-white/25 leading-relaxed border-t border-white/10 pt-2">
+              💡 Para maior precisão, repouse por pelo menos 5 minutos antes de medir.
+            </p>
+
+            <button
+              onClick={closeTip}
+              className="w-full py-3.5 rounded-xl border border-white/10 text-white/60 text-sm font-medium hover:border-white/20 transition-all"
+            >
+              Fechar
+            </button>
+          </div>
         </div>
       )}
 
