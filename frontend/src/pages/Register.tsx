@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { User, Mail, Lock, Eye, EyeOff } from 'lucide-react'
-import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
+import { createUserWithEmailAndPassword, updateProfile, signOut } from 'firebase/auth'
 import { auth } from '../config/firebase'
 
 export default function Register() {
@@ -33,7 +33,9 @@ export default function Register() {
     try {
       const { user } = await createUserWithEmailAndPassword(auth, email, password)
       await updateProfile(user, { displayName: name })
-      navigate('/health-profile')
+      // Desloga a sessão criada automaticamente para que o usuário entre pelo login
+      await signOut(auth)
+      navigate('/login', { state: { registered: true } })
     } catch (err: any) {
       if (err.code === 'auth/email-already-in-use') {
         setError('Este e-mail já está cadastrado.')

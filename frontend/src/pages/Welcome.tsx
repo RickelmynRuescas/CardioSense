@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { ChevronRight } from 'lucide-react'
+import { ChevronRight, ArrowDown, Activity, ArrowUp, Hand, HeartPulse } from 'lucide-react'
 import BottomNav from '../components/BottomNav'
 import { auth } from '../config/firebase'
 
@@ -31,8 +31,9 @@ export default function Welcome() {
 
         {/* Saudação */}
         <div className="flex flex-col gap-2">
-          <p className="text-white/40 text-sm font-medium">
-            Olá, <span className="text-accent font-semibold">{firstName}</span> 👋
+          <p className="flex items-center gap-1.5 text-white/40 text-base font-medium">
+            <span>Olá, <span className="text-accent font-semibold">{firstName}</span></span>
+            <Hand className="text-accent" size={16} />
           </p>
           <h1 className="text-2xl font-bold text-white leading-tight">
             Bem-vindo ao<br />
@@ -42,8 +43,8 @@ export default function Welcome() {
 
         {/* Frase motivacional */}
         <div className="bg-bg-card border border-white/10 rounded-2xl px-6 py-5 max-w-xs w-full">
-          <p className="text-white/80 text-base font-medium leading-relaxed">
-            Vamos fazer seu BPM hoje? 💓
+          <p className="flex items-center gap-2 text-white/80 text-base font-medium leading-relaxed">
+            Vamos fazer seu BPM hoje? <HeartPulse className="text-accent flex-shrink-0" size={18} />
           </p>
           <p className="text-white/30 text-xs mt-2 leading-relaxed">
             Monitorar sua frequência cardíaca regularmente é o primeiro passo para uma vida mais saudável.
@@ -68,18 +69,27 @@ export default function Welcome() {
           <p className="text-sm text-white/40 leading-relaxed">
             Para adultos em repouso, a faixa considerada normal é de <span className="text-accent font-semibold">60 a 100 BPM</span>. Abaixo disso pode indicar bradicardia; acima, taquicardia.
           </p>
-          <div className="flex gap-2 mt-1">
-            <div className="flex-1 bg-blue-500/10 border border-blue-500/20 rounded-xl px-3 py-2 text-center">
-              <p className="text-xs font-bold text-blue-400">&lt; 60</p>
-              <p className="text-[10px] text-white/30 mt-0.5">Baixo</p>
+          <div className="flex gap-2.5 mt-1">
+            <div className="flex-1 flex flex-col items-center gap-2 rounded-2xl border border-blue-500/20 bg-gradient-to-b from-blue-500/10 to-transparent px-2 py-3.5 shadow-[0_0_15px_rgba(59,130,246,0.08)]">
+              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-blue-500/15">
+                <ArrowDown className="text-blue-400" size={15} />
+              </div>
+              <p className="text-base font-bold text-white leading-none">&lt; 60</p>
+              <p className="text-[10px] font-semibold uppercase tracking-wider text-blue-400/80">Baixo</p>
             </div>
-            <div className="flex-1 bg-green-500/10 border border-green-500/20 rounded-xl px-3 py-2 text-center">
-              <p className="text-xs font-bold text-green-400">60–100</p>
-              <p className="text-[10px] text-white/30 mt-0.5">Normal</p>
+            <div className="flex-1 flex flex-col items-center gap-2 rounded-2xl border border-green-500/20 bg-gradient-to-b from-green-500/10 to-transparent px-2 py-3.5 shadow-[0_0_15px_rgba(34,197,94,0.08)]">
+              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-green-500/15">
+                <Activity className="text-green-400" size={15} />
+              </div>
+              <p className="text-base font-bold text-white leading-none">60–100</p>
+              <p className="text-[10px] font-semibold uppercase tracking-wider text-green-400/80">Normal</p>
             </div>
-            <div className="flex-1 bg-red-500/10 border border-red-500/20 rounded-xl px-3 py-2 text-center">
-              <p className="text-xs font-bold text-red-400">&gt; 100</p>
-              <p className="text-[10px] text-white/30 mt-0.5">Elevado</p>
+            <div className="flex-1 flex flex-col items-center gap-2 rounded-2xl border border-red-500/20 bg-gradient-to-b from-red-500/10 to-transparent px-2 py-3.5 shadow-[0_0_15px_rgba(239,68,68,0.08)]">
+              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-red-500/15">
+                <ArrowUp className="text-red-400" size={15} />
+              </div>
+              <p className="text-base font-bold text-white leading-none">&gt; 100</p>
+              <p className="text-[10px] font-semibold uppercase tracking-wider text-red-400/80">Alto</p>
             </div>
           </div>
         </div>

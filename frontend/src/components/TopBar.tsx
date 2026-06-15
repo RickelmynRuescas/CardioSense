@@ -1,3 +1,4 @@
+import { Hand } from 'lucide-react'
 import { auth } from '../config/firebase'
 
 export default function TopBar() {
@@ -5,8 +6,9 @@ export default function TopBar() {
 
   return (
     <div className="px-5 pt-10 pb-1 flex items-center justify-end">
-      <p className="text-xs text-white/40 font-medium">
-        Olá, <span className="text-accent font-semibold">{userName}</span> 👋
+      <p className="flex items-center gap-1.5 text-xs text-white/40 font-medium">
+        <span>Olá, <span className="text-accent font-semibold">{userName}</span></span>
+        <Hand className="text-accent" size={13} />
       </p>
     </div>
   )

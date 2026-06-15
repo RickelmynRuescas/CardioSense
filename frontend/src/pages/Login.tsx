@@ -1,11 +1,13 @@
 import { useState } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
-import { Mail, Lock, Eye, EyeOff } from 'lucide-react'
+import { useNavigate, useLocation, Link } from 'react-router-dom'
+import { Mail, Lock, Eye, EyeOff, CheckCircle2 } from 'lucide-react'
 import { signInWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth'
 import { auth } from '../config/firebase'
 
 export default function Login() {
   const navigate = useNavigate()
+  const location = useLocation()
+  const registered = (location.state as { registered?: boolean } | null)?.registered ?? false
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
@@ -72,6 +74,13 @@ export default function Login() {
             <p className="text-xs text-white/40 mt-1">Monitoramento inteligente, cuidado que salva vidas.</p>
           </div>
         </div>
+
+        {registered && (
+          <div className="fade-in-down w-full flex items-center justify-center gap-2 text-accent">
+            <CheckCircle2 className="flex-shrink-0" size={16} />
+            <span className="text-sm">Conta criada! Faça login para continuar.</span>
+          </div>
+        )}
 
         {/* Form */}
         <form onSubmit={handleLogin} className="w-full flex flex-col gap-4">

@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Heart, Minus, Plus, Info, X } from 'lucide-react'
+import { Heart, Minus, Plus, Info, X, Hand, HeartPulse, Watch, Smartphone, Lightbulb } from 'lucide-react'
 import BottomNav from '../components/BottomNav'
 import { analyzeHeartRate, type HealthProfile } from '../utils/heartAnalysis'
 import { Heart as HeartIcon } from 'lucide-react'
@@ -85,7 +85,7 @@ export default function Monitor() {
 
             {/* Método 1 — pulso */}
             <div>
-              <p className="text-xs text-accent font-semibold mb-1.5">🤲 Pelo pulso (punho)</p>
+              <p className="flex items-center gap-1.5 text-xs text-accent font-semibold mb-1.5"><Hand size={14} /> Pelo pulso (punho)</p>
               <ol className="text-xs text-white/50 space-y-1 list-decimal list-inside leading-relaxed">
                 <li>Sente-se e fique em repouso por 2 minutos</li>
                 <li>Coloque 2 dedos na parte interna do pulso, abaixo do polegar</li>
@@ -96,7 +96,7 @@ export default function Monitor() {
 
             {/* Método 2 — pescoço */}
             <div>
-              <p className="text-xs text-accent font-semibold mb-1.5">🫀 Pelo pescoço (carótida)</p>
+              <p className="flex items-center gap-1.5 text-xs text-accent font-semibold mb-1.5"><HeartPulse size={14} /> Pelo pescoço (carótida)</p>
               <ol className="text-xs text-white/50 space-y-1 list-decimal list-inside leading-relaxed">
                 <li>Peça para alguém (ou use você mesmo) colocar o dedo indicador levemente na lateral do pescoço, ao lado da traqueia</li>
                 <li>Sinta o pulso sem apertar forte</li>
@@ -107,7 +107,7 @@ export default function Monitor() {
 
             {/* Método 3 — dispositivos */}
             <div>
-              <p className="text-xs text-accent font-semibold mb-1.5">⌚ Por dispositivos externos</p>
+              <p className="flex items-center gap-1.5 text-xs text-accent font-semibold mb-1.5"><Watch size={14} /> Por dispositivos externos</p>
               <ul className="text-xs text-white/50 space-y-1 list-disc list-inside leading-relaxed">
                 <li>Smartwatch ou relógio inteligente (Apple Watch, Galaxy Watch, etc.)</li>
                 <li>Oxímetro de dedo — mede SpO₂ e BPM simultaneamente</li>
@@ -117,7 +117,7 @@ export default function Monitor() {
 
             {/* Método 4 — câmera do celular */}
             <div>
-              <p className="text-xs text-accent font-semibold mb-1.5">📱 Pela câmera do celular</p>
+              <p className="flex items-center gap-1.5 text-xs text-accent font-semibold mb-1.5"><Smartphone size={14} /> Pela câmera do celular</p>
               <ol className="text-xs text-white/50 space-y-1 list-decimal list-inside leading-relaxed">
                 <li>Abra apps como <span className="text-white/70">Cardiio</span>, <span className="text-white/70">Heart Rate Monitor</span> ou similar</li>
                 <li>Cubra a câmera traseira com o dedo indicador</li>
@@ -126,8 +126,9 @@ export default function Monitor() {
               </ol>
             </div>
 
-            <p className="text-[10px] text-white/25 leading-relaxed border-t border-white/10 pt-2">
-              💡 Para maior precisão, repouse por pelo menos 5 minutos antes de medir.
+            <p className="flex items-start gap-1.5 text-[10px] text-white/25 leading-relaxed border-t border-white/10 pt-2">
+              <Lightbulb className="flex-shrink-0 mt-0.5" size={12} />
+              <span>Para maior precisão, repouse por pelo menos 5 minutos antes de medir.</span>
             </p>
 
             <button
@@ -210,20 +211,17 @@ export default function Monitor() {
           <div className="flex justify-between text-xs text-white/30 mb-2">
             <span>Baixo</span>
             <span>Normal</span>
-            <span>Elevado</span>
-            <span>Muito Alto</span>
+            <span>Alto</span>
           </div>
           <div className="h-2 rounded-full overflow-hidden flex">
             <div className="flex-1 bg-blue-500/60" />
             <div className="flex-[2] bg-green-500/60" />
-            <div className="flex-1 bg-yellow-500/60" />
             <div className="flex-1 bg-red-500/60" />
           </div>
           <div className="flex justify-between text-xs text-white/20 mt-1">
             <span>&lt;{normalMin}</span>
             <span>{normalMin}–{normalMax}</span>
-            <span>{normalMax + 1}–{normalMax + 20}</span>
-            <span>&gt;{normalMax + 20}</span>
+            <span>&gt;{normalMax}</span>
           </div>
         </div>
       </div>

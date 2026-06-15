@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { ChevronDown, ClipboardList } from 'lucide-react'
+import { ChevronDown, ClipboardList, AlertTriangle } from 'lucide-react'
 import BottomNav from '../components/BottomNav'
 import { api } from '../services/api'
 
@@ -205,8 +205,9 @@ export default function HealthProfile() {
 
         {/* Aviso */}
         <div className="bg-bg-card border border-white/8 rounded-xl p-4 mt-1">
-          <p className="text-xs text-white/30 leading-relaxed">
-            ⚠️ O CardioSense não substitui consultas médicas. Informações com caráter educativo e preventivo.
+          <p className="flex items-start gap-2 text-xs text-white/30 leading-relaxed">
+            <AlertTriangle className="flex-shrink-0 mt-0.5 text-yellow-500/60" size={14} />
+            <span>O CardioSense não substitui consultas médicas. Informações com caráter educativo e preventivo.</span>
           </p>
         </div>
 
