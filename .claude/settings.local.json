@@ -3,7 +3,10 @@
     "allow": [
       "PowerShell(Invoke-RestMethod -Uri \"http://localhost:3001/health\" -Method Get)",
       "PowerShell(netstat *)",
-      "WebFetch(domain:cardiosense-ky4y.onrender.com)"
+      "WebFetch(domain:cardiosense-ky4y.onrender.com)",
+      "Bash(cat package.json)",
+      "Bash(cat render.yaml)",
+      "Bash(ls *.yaml *.yml)"
     ]
   }
 }

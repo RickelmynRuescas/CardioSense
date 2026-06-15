@@ -73,7 +73,7 @@ export default function Result() {
   useEffect(() => {
     localStorage.setItem('lastBpm', String(bpm))
 
-    if (!location.state?.bpm || savedRef.current) return
+    if (!location.state?.isNew || savedRef.current) return
     savedRef.current = true
 
     const measurement = {

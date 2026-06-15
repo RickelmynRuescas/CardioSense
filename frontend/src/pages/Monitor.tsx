@@ -43,7 +43,7 @@ export default function Monitor() {
   const badge   = riskBadge[riskLevel]
 
   function handleAnalyze() {
-    navigate('/result', { state: { bpm } })
+    navigate('/result', { state: { bpm, isNew: true } })
   }
 
   function clamp(v: number) {
